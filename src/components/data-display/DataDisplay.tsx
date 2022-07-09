@@ -2,6 +2,7 @@ import style from './DataDisplay.module.css'
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../store/store";
 import {ResponseType} from "../../api/dictionary-api";
+import Preloader from "../common/Preloader";
 
 export const DataDisplay = () => {
   const data = useSelector<AppStateType, ResponseType>(state => state.app.isData)
@@ -15,7 +16,9 @@ export const DataDisplay = () => {
   }
 
   if (isLoading) {
-    return <p>Data is loading...</p>;
+    return <div className="preload">
+      <Preloader/>
+    </div>
   }
 
   return (
