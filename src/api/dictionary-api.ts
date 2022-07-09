@@ -1,11 +1,12 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: 'https://api.dictionaryapi.dev/api/v2/entries/en/',
-});
+const instance = axios.create();
 export const dictionaryAPI = {
   getRequest(word: string) {
-    return instance.get<ResponseType>(`${word}`)
+    return instance.get<Array<ResponseType>>(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+      .then(result => {
+        return result.data[0]
+      })
   }
 }
 
