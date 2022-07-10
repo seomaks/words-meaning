@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent} from "react";
 import {AppStateType} from "../../store/store";
 import {useDispatch, useSelector} from "react-redux";
-import {getMeaningTC, setWord} from "../../store/app-reducer";
+import {getMeaningTC, setAppError, setWord} from "../../store/app-reducer";
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ export const SearchBar = () => {
     e.preventDefault()
     dispatch(getMeaningTC(word) as any)
     dispatch(setWord(''))
+    dispatch(setAppError(null))
   }
 
   return <>

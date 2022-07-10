@@ -19,13 +19,12 @@ type InitialStateType = typeof initialState
 export const appReducer = (state: InitialStateType = initialState, action: AppActionsType): InitialStateType => {
   switch (action.type) {
     case 'app/SET-DATA':
-      return {...state, isData: action.isData}
     case 'app/SET-ERROR':
-      return {...state, error: action.error}
     case 'app/SET-IS-LOADING':
-      return {...state, isLoading: action.isLoading}
     case 'app/SET-WORD':
-      return {...state, word: action.word}
+      return {
+        ...state, ...action.payload
+      }
     default:
       return state
   }
@@ -34,19 +33,19 @@ export const appReducer = (state: InitialStateType = initialState, action: AppAc
 // actions
 export const setData = (isData: ResponseType) => ({
   type: 'app/SET-DATA',
-  isData
+  payload: {isData}
 } as const)
 export const setAppError = (error: ErrorType) => ({
   type: 'app/SET-ERROR',
-  error
+  payload: {error}
 } as const)
 export const setIsLoading = (isLoading: boolean) => ({
   type: 'app/SET-IS-LOADING',
-  isLoading,
+  payload: {isLoading},
 } as const)
 export const setWord = (word: string) => ({
   type: 'app/SET-WORD',
-  word,
+  payload: {word},
 } as const)
 
 // thunks
@@ -55,10 +54,15 @@ export const getMeaningTC = (word: string): AppThunkType => async dispatch => {
   try {
     const response = await dictionaryAPI.getRequest(word)
     dispatch(setData(response))
-  } catch (e) {
-    dispatch(setAppError('Error!'))
-    console.log('error')
-  }  finally {
+  } catch (e: any) {
+    if (e.response.data) {
+       dispatch(setAppError(e.response.data))
+    } else dispatch(setAppError({
+      title: 'Error',
+      message: 'Sorry',
+      resolution: 'Try later...'
+    }))
+  } finally {
     dispatch(setIsLoading(false))
   }
 }
@@ -72,5 +76,10 @@ export type AppActionsType = SetDataActionType
   | SetAppErrorActionType
   | SetIsLoadingActionType
   | SetWordActionType
-export type ErrorType = string | null
+type ErrorObjType = {
+  message: string,
+  resolution: string,
+  title: string
+}
+export type ErrorType = ErrorObjType | null
 
