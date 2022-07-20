@@ -14,7 +14,6 @@ const initialState = {
   } as ResponseType,
 }
 
-type InitialStateType = typeof initialState
 
 export const appReducer = (state: InitialStateType = initialState, action: AppActionsType): InitialStateType => {
   switch (action.type) {
@@ -68,18 +67,19 @@ export const getMeaningTC = (word: string): AppThunkType => async dispatch => {
 }
 
 // types
+type InitialStateType = typeof initialState
 export type SetDataActionType = ReturnType<typeof setData>
 export type SetAppErrorActionType = ReturnType<typeof setAppError>
 export type SetIsLoadingActionType = ReturnType<typeof setIsLoading>
 export type SetWordActionType = ReturnType<typeof setWord>
-export type AppActionsType = SetDataActionType
-  | SetAppErrorActionType
-  | SetIsLoadingActionType
-  | SetWordActionType
 type ErrorObjType = {
   message: string,
   resolution: string,
   title: string
 }
 export type ErrorType = ErrorObjType | null
+export type AppActionsType = SetDataActionType
+  | SetAppErrorActionType
+  | SetIsLoadingActionType
+  | SetWordActionType
 

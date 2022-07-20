@@ -1,10 +1,15 @@
 import {ChangeEvent, FormEvent} from "react";
 import {AppStateType} from "../../store/store";
-import {useDispatch, useSelector} from "react-redux";
-import {getMeaningTC, setAppError, setWord} from "../../store/app-reducer";
+import {useSelector} from "react-redux";
+import {
+  getMeaningTC,
+  setAppError,
+  setWord
+} from "../../store/app-reducer";
+import {useAppDispatch} from "../../hooks";
 
 export const SearchBar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
   const word = useSelector<AppStateType, string>(state => state.app.word)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +19,7 @@ export const SearchBar = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(getMeaningTC(word) as any)
+    dispatch(getMeaningTC(word))
     dispatch(setWord(''))
     dispatch(setAppError(null))
   }
