@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/words-meaning/static/css/main.c99f2326.css",
+    "main.js": "/words-meaning/static/js/main.bd58bdde.js",
+    "static/js/787.14457555.chunk.js": "/words-meaning/static/js/787.14457555.chunk.js",
+    "static/media/preloader.svg": "/words-meaning/static/media/preloader.a2d2b89716ea8ab8eba926d48d956435.svg",
+    "index.html": "/words-meaning/index.html",
+    "main.c99f2326.css.map": "/words-meaning/static/css/main.c99f2326.css.map",
+    "main.bd58bdde.js.map": "/words-meaning/static/js/main.bd58bdde.js.map",
+    "787.14457555.chunk.js.map": "/words-meaning/static/js/787.14457555.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c99f2326.css",
+    "static/js/main.bd58bdde.js"
+  ]
+}
